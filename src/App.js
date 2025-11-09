@@ -79,18 +79,14 @@ function App() {
         <div className="home-content">
           <div className="home-header">
             <h1 className="home-title">Hello, I'm Carson</h1>
-            <p className="home-subtitle">
-              Software Engineering Technology student specializing in full-stack development, AI/ML, and data analytics
-            </p>
+
           </div>
           
           <div className="mission-card">
             <h2 className="mission-title">My Mission</h2>
-            <p className="mission-text">
-              To apply advanced analytics and machine learning techniques to enhance operational efficiency and customer satisfaction. 
-              I'm passionate about delivering scalable web applications, financial data tools, and automation solutions that make a real impact.
-            </p>
-          </div>
+                        <p className="mission-text">
+                          To push the boundaries of computation through low-level optimization, parallel processing, and advanced algorithmic design. I'm driven to build high-performance systems, innovate in system architecture, and contribute to the foundational technologies that power the future of computing.
+                        </p>          </div>
 
           <div className="home-buttons">
             <button
@@ -132,15 +128,12 @@ function App() {
           <div className="about-text">
             <div className="about-info">
               <h2 className="about-name">Carson Stewart</h2>
-              <p className="about-description">
-                I am a motivated Software Engineering Technology student at Centennial College with expertise in full-stack development, AI/ML, and data analytics. 
-                I'm proficient in delivering scalable web applications, financial data tools, and automation solutions, with hands-on experience in React, Node.js, Python, and cloud technologies.
-              </p>
-              <p className="about-description">
-                Currently serving as Vice President of the AI Club at Centennial College, I lead technical workshops on neural networks and computer vision while mentoring fellow students. 
-                My passion lies in applying advanced analytics and machine learning techniques to solve real-world problems and enhance operational efficiency.
-              </p>
-            </div>
+                            <p className="about-description">
+                              I am a Computer Science student currently focused on expanding my expertise in C++ for systems and performance, GPU programming with CUDA, and low-level optimization and memory models. My goal is to build a strong foundation in these areas to tackle complex computational challenges.
+                            </p>
+                            <p className="about-description">
+                              My interests span compilers and runtime systems, parallel computation, and algorithmic optimization with mathematical methods. I am also fascinated by market dynamics and the philosophy of computation, seeking to understand and apply these concepts in innovative ways.
+                            </p>            </div>
             
             <button
               onClick={() => alert("Resume download would be implemented here with actual PDF file")}
@@ -173,10 +166,10 @@ function App() {
         outcome: "Reduced manual effort by 80% with optimized automated outreach strategies"
       },
       {
-        title: "Freelance Web Development Projects",
-        description: "Delivered 5 responsive web applications using React, Node.js, and RESTful APIs, incorporating data visualization components with cross-browser compatibility.",
-        role: "Independent Developer",
-        outcome: "Achieved 20% increase in client traffic through optimized solutions and full lifecycle management"
+        title: "Goldilocks Field Implementation",
+        description: "A minimal Rust implementation of arithmetic over the Goldilocks prime field (p = 2⁶⁴ − 2³² + 1), crucial for modern zero-knowledge proof systems and high-performance cryptographic protocols. This crate provides modular arithmetic, a safe `FieldElement` type, and basic field operations like addition, subtraction, multiplication, negation, inversion, and exponentiation by squaring. The implementation prioritizes correctness and clarity, making it suitable for educational use, prototyping, or as a reference.",
+        role: "Developer",
+        outcome: "Provided a foundational cryptographic primitive for advanced ZKP systems, emphasizing clarity and correctness."
       }
     ];
 
@@ -287,19 +280,24 @@ function App() {
         icon: Code
       },
       {
-        title: "AI/ML Development",
-        description: "Machine learning solutions using TensorFlow, PyTorch, and scikit-learn for data analytics, neural networks, and automation pipelines",
+        title: "High-Performance AI/ML Development",
+        description: "High-performance computing solutions for AI/ML, leveraging C++, CUDA, and low-level optimizations for neural networks and parallel processing in data-intensive applications.",
         icon: Settings
       },
       {
-        title: "Data Analytics & Visualization",
-        description: "Financial data tools, backtesting systems, and interactive dashboards using Python, Pandas, and Matplotlib for actionable insights",
+        title: "Algorithmic Optimization & Data Analysis",
+        description: "Applying advanced algorithmic optimization and mathematical methods for data analysis, including high-performance data processing and visualization for complex systems.",
         icon: Briefcase
       },
       {
         title: "Cloud Solutions",
         description: "Scalable cloud-native development on AWS, GCP, and Azure with containerization using Kubernetes and automated deployment pipelines",
         icon: Settings
+      },
+      {
+        title: "Systems Programming & Cryptography",
+        description: "Developing robust systems with C++ for performance-critical applications, including GPU programming with CUDA, low-level optimization, and building robust and secure system components for secure and efficient computation.",
+        icon: Code
       },
       {
         title: "Web Scraping & Automation",
