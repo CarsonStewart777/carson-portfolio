@@ -1,0 +1,414 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Container and layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.page {
+  padding: 4rem 0;
+  background: var(--gyan-content-bg);
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Subtle border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.05); /* Layered shadow */
+  min-height: calc(100vh - 96px);
+}
+
+/* Navigation styles */
+.navbar {
+  background-color: var(--gyan-header-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Refined shadow */
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 24px solid var(--gyan-section-bar-bg);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+}
+
+/* Logo styles */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+}
+
+.logo-circle {
+  display: none; /* Hide the circle as it doesn't fit the new design */
+}
+
+.logo-text {
+  font-family: var(--font-primary);
+  font-size: 2rem;
+  color: var(--gyan-header-title);
+}
+
+.logo-name {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--gyan-text-secondary);
+}
+
+/* Navigation links */
+.nav-links {
+  display: flex;
+  gap: 0.5rem; /* Adjusted gap for "off colour boxes" */
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-button {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  color: var(--gyan-text-primary);
+  background: var(--gyan-code-bg); /* "off colour box" background */
+  border: 1px solid var(--gyan-code-border); /* "off colour box" border */
+  border-radius: 4px; /* Rounded corners for the box */
+  cursor: pointer;
+  padding: 0.6rem 1.2rem; /* Padding for the box */
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+  color: var(--gyan-text-primary); /* Revert to primary text color */
+  border-color: var(--gyan-code-border); /* Revert to code border color */
+  background: var(--gyan-content-bg); /* Subtle hover effect */
+}
+
+.nav-button-active {
+  color: var(--gyan-text-primary); /* Revert to primary text color */
+  border-color: var(--gyan-section-bar-bg); /* Use a gyan.dev color for active state */
+  background: var(--gyan-content-bg);
+}
+
+/* Page headers */
+.page-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  background: var(--gyan-section-bar-bg); /* Use a gyan.dev color */
+  box-shadow: 0px 4px 10px rgba(179, 157, 144, 0.93);
+  padding: 1rem;
+  margin-left: -2rem;
+  margin-right: -2rem;
+}
+
+.page-title {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--gyan-header-title); /* Use gyan.dev header title color */
+  letter-spacing: 0.06rem;
+}
+
+.page-divider {
+  display: none; /* Keeping this hidden as per gyan.dev structure */
+}
+
+/* Home page styles */
+.home-content {
+  text-align: center;
+}
+
+.home-header {
+  margin-bottom: 4rem;
+}
+
+.home-title {
+  font-family: var(--font-primary);
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--gyan-header-title); /* Use gyan.dev header title color */
+  margin-bottom: 2rem;
+  line-height: 1.1;
+}
+
+.home-subtitle {
+  font-family: var(--font-primary);
+  font-size: 1.25rem;
+  color: var(--gyan-text-secondary);
+  max-width: 48rem;
+  margin: 0 auto 3rem auto;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.mission-card {
+  background-color: var(--gyan-code-bg);
+  border-left: 5px solid var(--gyan-section-bar-bg); /* Subtle gyan.dev border */
+  border-right: 5px solid var(--gyan-section-bar-bg); /* Subtle gyan.dev border */
+  box-shadow: 0px 2px 5px var(--gyan-content-shadow);
+  border-radius: 5px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 64rem;
+}
+
+.mission-title {
+  font-family: var(--font-primary);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--gyan-text-primary);
+  margin-bottom: 1rem;
+}
+
+.mission-text {
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  color: var(--gyan-text-secondary);
+  line-height: 1.7;
+}
+
+.home-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Button styles */
+.btn {
+  font-family: var(--font-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* Reduced gap */
+  padding: 0.4rem 1rem; /* Reduced padding */
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 0.9rem; /* Reduced font size */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  background: var(--gyan-code-bg);
+  color: var(--gyan-code-text);
+  border: 1px solid var(--gyan-code-border);
+}
+
+.download-icon {
+  width: 16px; /* Set icon width */
+  height: 16px; /* Set icon height */
+}
+
+.btn:hover {
+  background: var(--gyan-content-bg); /* Subtle hover */
+  border-color: var(--gyan-text-secondary);
+  color: var(--gyan-text-primary);
+}
+
+.btn-primary {
+  background: var(--gyan-section-bar-bg); /* Use a gyan.dev color */
+  border: none;
+  color: var(--gyan-header-title); /* Dark text on bright button */
+  font-weight: 700;
+}
+
+.btn-secondary {
+  background: transparent;
+}
+
+.btn-submit {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Generic Section Styling */
+.section-title-box {
+  display: block;
+  width: max-content;
+  margin-left: -2rem;
+  margin-bottom: 1.5rem;
+  padding: 5px 40px 5px 20px;
+  background: var(--gyan-section-bar-bg); /* Use a gyan.dev color */
+  box-shadow: 2px 3px 4px var(--gyan-content-shadow);
+}
+
+.section-title {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--gyan-header-title); /* Use gyan.dev header title color */
+  letter-spacing: 0.05rem;
+}
+
+/* About page styles */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .about-content {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 4rem;
+  }
+}
+
+.about-image {
+  flex-shrink: 0;
+}
+
+.profile-placeholder {
+  width: 16rem;
+  height: 16rem;
+  background-color: var(--gyan-code-bg);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gyan-code-border);
+  box-shadow: 0 0 5px rgba(0,0,0,0.2); /* Subtle shadow */
+}
+
+.profile-icon {
+  color: var(--gyan-header-title); /* Use gyan.dev header title color */
+}
+
+.about-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.about-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.about-name {
+  font-family: var(--font-primary);
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--gyan-text-primary);
+}
+
+.about-description {
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  color: var(--gyan-text-secondary);
+  line-height: 1.7;
+}
+
+/* Projects, Education, Services, Contact Cards */
+.projects-grid, .education-grid, .services-grid, .contact-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-card, .education-card, .service-card, .contact-info-card, .contact-form-card {
+  background-color: var(--gyan-code-bg);
+  border: 1px solid var(--gyan-code-border);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* More prominent shadow */
+}
+
+.project-title, .education-degree, .service-title, .contact-info-title, .contact-form-title {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--gyan-header-title); /* Use gyan.dev header title color */
+  margin-bottom: 1rem;
+}
+
+.project-description, .education-description, .service-description, .contact-value {
+  color: var(--gyan-text-secondary);
+}
+
+.project-details, .education-info, .contact-info-list {
+  margin-top: 1rem;
+}
+
+.detail-label {
+  font-weight: 700;
+  color: var(--gyan-header-title); /* Use gyan.dev header title color */
+}
+
+.education-institution {
+  color: var(--gyan-header-title); /* Use gyan.dev header title color */
+  font-weight: 700;
+}
+
+/* Form styles */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--gyan-code-border);
+  background-color: var(--gyan-code-bg);
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  color: var(--gyan-text-primary);
+  border-radius: 8px;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: 2px solid var(--gyan-section-bar-bg); /* Use a gyan.dev color for focus */
+  box-shadow: 0 0 5px rgba(0,0,0,0.2); /* Subtle shadow */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .nav-content {
+    flex-direction: row;
+  }
+  
+  .nav-links {
+    gap: 0.5rem;
+    position: static;
+    transform: none;
+    background: transparent;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 0;
+    margin-top: 0;
+  }
+  
+  .home-title {
+    font-size: 3rem;
+  }
+}

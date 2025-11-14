@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
+
+:root {
+  /* Font */
+  --font-primary: "Inter", "Helvetica", "Arial", sans-serif;
+
+  /* Base Colors from gyan.dev */
+  --gyan-bg-gradient: linear-gradient(90deg, rgb(121, 158, 136) 5%, rgb(171, 171, 138) 28% 72%, rgb(121,158,136) 95%);
+  --gyan-bg-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='160' height='32'%3E%3Cfilter id='vnoise' x='0' y='0'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.0 0.01' numOctaves='2' seed='16807' stitchTiles='stitch' result='noise' /%3E%3CfeBlend mode='color-dodge' in='SourceGraphic' in2='noise'/%3E%3C/filter%3E%3Crect width='160' height='32' filter='url(%23ccc5)' opacity='0.35'/%3E%3C/svg%3E");
+  
+  --gyan-header-bg: rgb(233, 227, 210);
+  --gyan-header-title: rgb(43, 88, 111);
+  --gyan-header-emboss: rgb(222, 216, 199);
+  --gyan-section-bar-bg: rgb(185, 215, 204);
+
+  --gyan-content-bg: rgb(212, 215, 201);
+  --gyan-content-shadow: rgb(97, 96, 92, 0.5);
+
+  --gyan-text-primary: rgb(51, 51, 51);
+  --gyan-text-secondary: rgb(96, 96, 96);
+  --gyan-link-color: rgb(16, 109, 151);
+  
+  --gyan-section-title-bg: linear-gradient(90deg, rgb(189, 190, 172) 18px, rgb(196, 197, 182) 18px calc(100% - 18px), rgb(189, 190, 172) calc(100% - 18px));
+  --gyan-section-title-color: rgb(124, 123, 112);
+  --gyan-section-title-shadow: rgba(132, 115, 105, 0.66);
+
+  --gyan-code-bg: rgb(200, 211, 185);
+  --gyan-code-border: #7f857a;
+  --gyan-code-text: rgb(52, 70, 50);
+
+  /* Paper Texture - Emphasized */
+  --paper-texture: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.35'%3E<path d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E</g></g></svg>");
+}
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  color: var(--gyan-text-primary);
+  background-image: var(--paper-texture); /* Use paper texture */
+  background-repeat: repeat; /* Ensure texture repeats */
+  background-blend-mode: normal;
+  background-size: auto; /* Adjust size for texture */
+  background-position: top left; /* Position texture */
+  background-attachment: scroll; /* Allow scrolling with content */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: var(--font-inconsolata);
+}
