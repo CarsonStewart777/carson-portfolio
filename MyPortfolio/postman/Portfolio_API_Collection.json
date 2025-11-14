@@ -1,46 +1,23 @@
-
 {
 	"info": {
-		"_postman_id": "a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6",
-		"name": "Portfolio API Collection",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d7",
+		"name": "Portfolio API - Corrected",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"description": "Corrected Postman collection for the Portfolio API. Base URL is http://localhost:8080."
 	},
 	"item": [
 		{
-			"name": "Contacts",
+			"name": "Auth",
+			"description": "Authentication routes",
 			"item": [
 				{
-					"name": "Get All Contacts",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5000/api/contacts",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"contacts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Contact",
+					"name": "Register User",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{
-    "firstname": "John",
-    "lastname": "Doe",
-    "email": "john.doe@example.com"
-}",
+							"raw": "{\n    \"name\": \"Test User\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -48,71 +25,39 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/contacts",
+							"raw": "http://localhost:8080/api/auth/register",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"contacts"
-							]
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "auth", "register"]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete All Contacts",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5000/api/contacts",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"contacts"
-							]
+					"name": "Login (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"jwt_token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Contact By Id",
+					],
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5000/api/contacts/60d5f1b3b5b3f8b3f8b3f8b3",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"contacts",
-								"60d5f1b3b5b3f8b3f8b3f8b3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Contact",
-					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{
-    "firstname": "Jane"
-}",
+							"raw": "{\n    \"email\": \"admin@portfolio.com\",\n    \"password\": \"Admin123!\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -120,38 +65,54 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/contacts/60d5f1b3b5b3f8b3f8b3f8b3",
+							"raw": "http://localhost:8080/api/auth/login",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"contacts",
-								"60d5f1b3b5b3f8b3f8b3f8b3"
-							]
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "auth", "login"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users (Admin Only)",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{"key": "token", "value": "{{jwt_token}}", "type": "string"}]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "users"]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete Contact",
+					"name": "Get User By ID",
 					"request": {
-						"method": "DELETE",
+						"auth": {
+							"type": "bearer",
+							"bearer": [{"key": "token", "value": "{{jwt_token}}", "type": "string"}]
+						},
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/contacts/60d5f1b3b5b3f8b3f8b3f8b3",
+							"raw": "http://localhost:8080/api/users/your_user_id_here",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"contacts",
-								"60d5f1b3b5b3f8b3f8b3f8b3"
-							]
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "users", "your_user_id_here"]
 						}
 					},
 					"response": []
@@ -162,38 +123,32 @@
 			"name": "Projects",
 			"item": [
 				{
-					"name": "Get All Projects",
+					"name": "Get All Projects (Public)",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/projects",
+							"raw": "http://localhost:8080/api/projects",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"projects"
-							]
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "projects"]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Create Project",
+					"name": "Create Project (Protected)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{"key": "token", "value": "{{jwt_token}}", "type": "string"}]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{
-    "title": "New Project",
-    "firstname": "John",
-    "lastname": "Doe",
-    "email": "john.doe@example.com"
-}",
+							"raw": "{\n    \"title\": \"My Awesome Project\",\n    \"description\": \"This project was created via the API.\",\n    \"projectUrl\": \"https://example.com\",\n    \"githubUrl\": \"https://github.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -201,106 +156,47 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/projects",
+							"raw": "http://localhost:8080/api/projects",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"projects"
-							]
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "projects"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Education",
+			"item": [
+				{
+					"name": "Get All Education (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/education",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "education"]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete All Projects",
+					"name": "Create Education (Admin Only)",
 					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5000/api/projects",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"projects"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Qualifications",
-			"item": [
-				{
-					"name": "Get All Qualifications",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5000/api/qualifications",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"qualifications"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Users",
-			"item": [
-				{
-					"name": "Get All Users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5000/api/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "Login",
-					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{"key": "token", "value": "{{jwt_token}}", "type": "string"}]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{
-    "email": "test@example.com",
-    "password": "123456"
-}",
+							"raw": "{\n    \"school\": \"University of Code\",\n    \"degree\": \"Masters in Backend Engineering\",\n    \"year\": \"2025\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -308,49 +204,70 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/auth/login",
+							"raw": "http://localhost:8080/api/education",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Profile",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-auth-token",
-								"value": "your_jwt_token",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:5000/api/auth/profile",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"auth",
-								"profile"
-							]
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "education"]
 						}
 					},
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "Submit Contact Message (Public)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"A Curious Visitor\",\n    \"email\": \"visitor@example.com\",\n    \"message\": \"This is a test message from Postman!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/contact",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "contact"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Contact Messages (Admin Only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{"key": "token", "value": "{{jwt_token}}", "type": "string"}]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/contact",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "contact"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "jwt_token",
+			"value": ""
 		}
 	]
 }

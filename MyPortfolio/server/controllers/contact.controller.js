@@ -1,50 +1,60 @@
-const Contact = require('../models/contact.model');
+const ContactMessage = require('../models/contact.model');
 
-// Create a new contact
-exports.createContact = async (req, res) => {
+// --- Create a new contact message (Public) ---
+exports.createContactMessage = async (req, res) => {
   try {
-    const contact = new Contact(req.body);
-    await contact.save();
-    res.status(201).send(contact);
-  } catch (error) {
-    res.status(400).send({ message: error.message || 'Error creating contact.' });
+    const newMessage = new ContactMessage({ ...req.body });
+    const message = await newMessage.save();
+    res.status(201).json({ msg: 'Message sent successfully!', message });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 };
 
-// Get all contacts
-exports.getContacts = async (req, res) => {
+// --- Get all contact messages (Admin only) ---
+exports.getAllContactMessages = async (req, res) => {
   try {
-    const contacts = await Contact.find({});
-    res.status(200).send(contacts);
-  } catch (error) {
-    res.status(500).send({ message: error.message || 'Error retrieving contacts.' });
+    const messages = await ContactMessage.find().sort({ createdAt: -1 });
+    res.json(messages);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 };
 
-// Update a contact by ID
-exports.updateContact = async (req, res) => {
+// --- Get contact message by ID (Admin only) ---
+exports.getContactMessageById = async (req, res) => {
   try {
-    const { id } = req.params;
-    const contact = await Contact.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
-    if (!contact) {
-      return res.status(404).send({ message: 'Contact not found.' });
+    const message = await ContactMessage.findById(req.params.id);
+    if (!message) {
+      return res.status(404).json({ msg: 'Message not found' });
     }
-    res.status(200).send(contact);
-  } catch (error) {
-    res.status(400).send({ message: error.message || 'Error updating contact.' });
+    res.json(message);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Message not found' });
+    }
+    res.status(500).send('Server error');
   }
 };
 
-// Delete a contact by ID
-exports.deleteContact = async (req, res) => {
+// --- Delete a contact message (Admin only) ---
+exports.deleteContactMessage = async (req, res) => {
   try {
-    const { id } = req.params;
-    const contact = await Contact.findByIdAndDelete(id);
-    if (!contact) {
-      return res.status(404).send({ message: 'Contact not found.' });
+    const message = await ContactMessage.findById(req.params.id);
+    if (!message) {
+      return res.status(404).json({ msg: 'Message not found' });
     }
-    res.status(200).send({ message: 'Contact deleted successfully.' });
-  } catch (error) {
-    res.status(500).send({ message: error.message || 'Error deleting contact.' });
+
+    await message.remove();
+    res.json({ msg: 'Message removed' });
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Message not found' });
+    }
+    res.status(500).send('Server error');
   }
 };

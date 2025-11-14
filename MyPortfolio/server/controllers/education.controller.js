@@ -1,50 +1,81 @@
 const Education = require('../models/education.model');
 
-// Create a new education entry
+// --- Create a new education entry (Admin only) ---
 exports.createEducation = async (req, res) => {
   try {
-    const education = new Education(req.body);
-    await education.save();
-    res.status(201).send(education);
-  } catch (error) {
-    res.status(400).send({ message: error.message || 'Error creating education entry.' });
+    const newEducation = new Education({ ...req.body });
+    const education = await newEducation.save();
+    res.status(201).json(education);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 };
 
-// Get all education entries
-exports.getEducation = async (req, res) => {
+// --- Get all education entries (Public) ---
+exports.getAllEducation = async (req, res) => {
   try {
-    const education = await Education.find({});
-    res.status(200).send(education);
-  } catch (error) {
-    res.status(500).send({ message: error.message || 'Error retrieving education entries.' });
+    const educationEntries = await Education.find().sort({ year: -1 });
+    res.json(educationEntries);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 };
 
-// Update an education entry by ID
+// --- Get education entry by ID (Public) ---
+exports.getEducationById = async (req, res) => {
+  try {
+    const education = await Education.findById(req.params.id);
+    if (!education) {
+      return res.status(404).json({ msg: 'Education entry not found' });
+    }
+    res.json(education);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Education entry not found' });
+    }
+    res.status(500).send('Server error');
+  }
+};
+
+// --- Update an education entry (Admin only) ---
 exports.updateEducation = async (req, res) => {
   try {
-    const { id } = req.params;
-    const education = await Education.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+    let education = await Education.findById(req.params.id);
     if (!education) {
-      return res.status(404).send({ message: 'Education entry not found.' });
+      return res.status(404).json({ msg: 'Education entry not found' });
     }
-    res.status(200).send(education);
-  } catch (error) {
-    res.status(400).send({ message: error.message || 'Error updating education entry.' });
+
+    education = await Education.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+
+    res.json(education);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 };
 
-// Delete an education entry by ID
+// --- Delete an education entry (Admin only) ---
 exports.deleteEducation = async (req, res) => {
   try {
-    const { id } = req.params;
-    const education = await Education.findByIdAndDelete(id);
+    const education = await Education.findById(req.params.id);
     if (!education) {
-      return res.status(404).send({ message: 'Education entry not found.' });
+      return res.status(404).json({ msg: 'Education entry not found' });
     }
-    res.status(200).send({ message: 'Education entry deleted successfully.' });
-  } catch (error) {
-    res.status(500).send({ message: error.message || 'Error deleting education entry.' });
+
+    await education.remove();
+    res.json({ msg: 'Education entry removed' });
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Education entry not found' });
+    }
+    res.status(500).send('Server error');
   }
 };

@@ -1,26 +1,25 @@
 {
   "name": "my-portfolio-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend server for the portfolio application",
   "main": "server.js",
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix client"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^3.0.2",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.19.2"
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.8.0"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1",
-    "nodemon": "^3.1.10"
+    "nodemon": "^2.0.20"
   }
 }

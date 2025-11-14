@@ -3,22 +3,27 @@ const mongoose = require('mongoose');
 const EducationSchema = new mongoose.Schema({
   school: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
   },
   degree: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
   },
-  startDate: {
-    type: Date,
-    required: true
+  fieldOfStudy: {
+    type: String,
+    trim: true,
   },
-  endDate: {
-    type: Date,
-    required: true
-  }
+  year: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+  },
 }, {
-  timestamps: true
+  timestamps: true, // Adds createdAt and updatedAt timestamps
 });
 
 module.exports = mongoose.model('Education', EducationSchema);
