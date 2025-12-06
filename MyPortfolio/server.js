@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const compression = require('compression'); // Import compression middleware
 const dbConfig = require('./server/config/db.config');
 const { createAdminUser } = require('./server/controllers/auth.controller');
 
@@ -14,6 +15,9 @@ app.use(cors());
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+// Enable Gzip compression for all responses
+app.use(compression());
 
 // --- DIAGNOSTIC LOGGER ---
 // This will log details for every incoming request.
