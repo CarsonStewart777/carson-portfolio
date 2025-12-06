@@ -63,6 +63,7 @@ const HomePage = ({ setCurrentPage }) => (
             To push the boundaries of computation through low-level optimization, parallel processing, and advanced algorithmic design. I'm driven to build high-performance systems, innovate in system architecture, and contribute to the foundational technologies that power the future of computing.
           </p>
         </div>
+        <p>CI/CD Deployment Verified - Friday, December 5, 2025</p>
         <div className="home-buttons">
           <button onClick={() => setCurrentPage('about')} className="btn btn-primary">
             <User size={22} />
